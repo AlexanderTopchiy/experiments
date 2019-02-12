@@ -3,6 +3,7 @@ package com.wyverx.recyclers.presentation.view.players;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wyverx.recyclers.R;
 import com.wyverx.recyclers.data.repositories.players.PlayersRepositoryImpl;
@@ -59,6 +60,6 @@ public class PlayersActivity extends AppCompatActivity implements PlayersPresent
 
     @Override
     public void showError(String message) {
-        mPlayersTextView.setText(message);
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
