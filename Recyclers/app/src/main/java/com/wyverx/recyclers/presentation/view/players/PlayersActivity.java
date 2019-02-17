@@ -2,7 +2,8 @@ package com.wyverx.recyclers.presentation.view.players;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.wyverx.recyclers.R;
@@ -21,9 +22,9 @@ import butterknife.ButterKnife;
 public class PlayersActivity extends AppCompatActivity implements PlayersPresenter.View {
 
     private PlayersPresenter mPresenter;
+    private PlayersRecyclerViewAdapter mPlayersAdapter;
 
-    @BindView(R.id.players_text_view)
-    TextView mPlayersTextView;
+    @BindView(R.id.players_recycler_view) RecyclerView mPlayersRecyclerView;
 
 
     @Override
@@ -50,11 +51,10 @@ public class PlayersActivity extends AppCompatActivity implements PlayersPresent
 
     @Override
     public void displayPlayersList(List<Player> playersList) {
-        String result = "";
-        for (Player player : playersList) {
-            result += player.getName() + "\n";
-        }
-        mPlayersTextView.setText(result);
+        int numberOfColumns = 2;
+        mPlayersRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+        mPlayersAdapter = new PlayersRecyclerViewAdapter(this, playersList);
+        mPlayersRecyclerView.setAdapter(mPlayersAdapter);
     }
 
 
