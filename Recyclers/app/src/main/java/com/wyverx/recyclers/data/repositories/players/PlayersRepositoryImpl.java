@@ -20,13 +20,28 @@ public class PlayersRepositoryImpl implements PlayersRepository {
                 "Fan Tingyu",
                 "Kim Jiseok",
                 "Yang Dingxin",
-                "Shi Yue"
+                "Shi Yue",
+                "Xie Erhao",
+                "Jiang Weijie",
+                "Xu Jiayang",
+                "Chen Yaoye",
+                "Tuo Jiaxi",
+                "Li Qincheng",
+                "Fan Yunruo",
+                "Wang Xi",
+                "Lee Donghoon",
+                "Tong Mengcheng",
+                "Shin Minjun",
+                "Liao Yuanhe",
+                "Xie Ke",
+                "Zhou Ruiyang",
+                "Byun Sangil"
         };
 
         List<Player> playersList = new ArrayList<>();
 
-        for (String player : playersArray) {
-            playersList.add(new Player(player));
+        for (String playerName : playersArray) {
+            playersList.add(new Player(playerName));
         }
 
         return playersList;
