@@ -53,6 +53,11 @@ public class PlayersActivity extends AppCompatActivity implements PlayersPresent
     public void displayPlayersList(List<Player> playersList) {
         int numberOfColumns = 2;
         mPlayersRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+
+        int recyclerViewSpacing = 15;
+        RecyclerViewItemDecoration itemDecoration = new RecyclerViewItemDecoration(recyclerViewSpacing);
+        mPlayersRecyclerView.addItemDecoration(itemDecoration);
+
         mPlayersAdapter = new PlayersRecyclerViewAdapter(this, playersList);
         mPlayersRecyclerView.setAdapter(mPlayersAdapter);
     }

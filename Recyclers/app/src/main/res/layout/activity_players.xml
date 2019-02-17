@@ -3,4 +3,5 @@
     android:id="@+id/players_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical" />
+    android:padding="@dimen/rv_spacing"
+    android:scrollbars="vertical"/>
