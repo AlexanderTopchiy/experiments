@@ -1,6 +1,5 @@
 package com.wyverx.recyclers.presentation.view.players;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,12 +15,10 @@ import java.util.List;
 public class PlayersRecyclerViewAdapter
         extends RecyclerView.Adapter<PlayersRecyclerViewAdapter.ViewHolder> {
 
-    private Context mContext;
     private List<Player> mPlayersList;
 
 
-    public PlayersRecyclerViewAdapter(Context context, List<Player> playersList) {
-        mContext = context;
+    public PlayersRecyclerViewAdapter(List<Player> playersList) {
         mPlayersList = playersList;
     }
 
@@ -29,7 +26,7 @@ public class PlayersRecyclerViewAdapter
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.players_rv_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.players_rv_item, parent, false);
         return new ViewHolder(view);
     }
 

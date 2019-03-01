@@ -58,7 +58,7 @@ public class PlayersActivity extends AppCompatActivity implements PlayersPresent
         RecyclerViewItemDecoration itemDecoration = new RecyclerViewItemDecoration(recyclerViewSpacing);
         mPlayersRecyclerView.addItemDecoration(itemDecoration);
 
-        mPlayersAdapter = new PlayersRecyclerViewAdapter(this, playersList);
+        mPlayersAdapter = new PlayersRecyclerViewAdapter(playersList);
         mPlayersRecyclerView.setAdapter(mPlayersAdapter);
     }
 
