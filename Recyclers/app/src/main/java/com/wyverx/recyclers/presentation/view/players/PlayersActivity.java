@@ -1,11 +1,15 @@
 package com.wyverx.recyclers.presentation.view.players;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.wyverx.recyclers.LeakActivity;
 import com.wyverx.recyclers.R;
 import com.wyverx.recyclers.data.repositories.players.PlayersRepositoryImpl;
 import com.wyverx.recyclers.domain.players.models.Player;
@@ -39,6 +43,15 @@ public class PlayersActivity extends AppCompatActivity implements PlayersPresent
                 MainThreadImpl.getInstance(),
                 this,
                 new PlayersRepositoryImpl());
+
+        Button leakButton = findViewById(R.id.leak_button);
+        leakButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent leakIntent = new Intent(getApplicationContext(), LeakActivity.class);
+                startActivity(leakIntent);
+            }
+        });
     }
 
 
