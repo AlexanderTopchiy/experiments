@@ -22,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PlayersActivity extends AppCompatActivity implements PlayersPresenter.View {
 
@@ -43,15 +44,6 @@ public class PlayersActivity extends AppCompatActivity implements PlayersPresent
                 MainThreadImpl.getInstance(),
                 this,
                 new PlayersRepositoryImpl());
-
-        Button leakButton = findViewById(R.id.leak_button);
-        leakButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent leakIntent = new Intent(getApplicationContext(), LeakActivity.class);
-                startActivity(leakIntent);
-            }
-        });
     }
 
 
@@ -79,5 +71,12 @@ public class PlayersActivity extends AppCompatActivity implements PlayersPresent
     @Override
     public void showError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @OnClick(R.id.leak_button)
+    public void leakCreat() {
+        Intent leakIntent = new Intent(getApplicationContext(), LeakActivity.class);
+        startActivity(leakIntent);
     }
 }
