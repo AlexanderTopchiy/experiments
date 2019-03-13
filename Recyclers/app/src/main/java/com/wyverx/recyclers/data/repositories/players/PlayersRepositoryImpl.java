@@ -41,7 +41,7 @@ public class PlayersRepositoryImpl implements PlayersRepository {
         List<Player> playersList = new ArrayList<>();
 
         for (String playerName : playersArray) {
-            playersList.add(new Player(playerName));
+            //playersList.add(new Player(playerName));
         }
 
         return playersList;
