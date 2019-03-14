@@ -44,7 +44,7 @@ public class PlayersRecyclerViewAdapter
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Player player = mPlayersList.get(position);
-        String playerName = player.getName();
+        String playerName = player.getLastName() + " " + player.getFirstName();
         holder.mPlayersTextView.setText(playerName);
     }
 

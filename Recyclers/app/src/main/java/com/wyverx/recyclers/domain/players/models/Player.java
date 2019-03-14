@@ -31,4 +31,25 @@ public class Player {
         mCountry = country;
         mElo = elo;
     }
+
+
+    public int getId() {
+        return mId;
+    }
+
+    public String getLastName() {
+        return mLastName;
+    }
+
+    public String getFirstName() {
+        return mFirstName;
+    }
+
+    public String getCountry() {
+        return mCountry;
+    }
+
+    public int getElo() {
+        return mElo;
+    }
 }
