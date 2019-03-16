@@ -11,5 +11,5 @@ import java.util.List;
 public interface PlayersDAO {
 
     @Query("SELECT * FROM players ORDER BY _id ASC")
-    List<Player> getPlayersInfo();
+    List<Player> getAllPlayers();
 }
