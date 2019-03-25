@@ -1,5 +1,6 @@
 package com.wyverx.recyclers.presentation.view.players;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,9 +44,19 @@ public class PlayersRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Player player = mPlayersList.get(position);
+        final Player player = mPlayersList.get(position);
         String playerName = player.getLastName() + " " + player.getFirstName();
         holder.mPlayersTextView.setText(playerName);
+
+        holder.mPlayersTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent playersDetailIntent = new Intent(view.getContext(), PlayersDetailActivity.class);
+                playersDetailIntent.putExtra("Last name", player.getLastName());
+                playersDetailIntent.putExtra("First name", player.getFirstName());
+                view.getContext().startActivity(playersDetailIntent);
+            }
+        });
     }
 
 
