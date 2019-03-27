@@ -54,10 +54,6 @@ public class PlayersActivity extends AppCompatActivity implements PlayersPresent
         int numberOfColumns = 2;
         mPlayersRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
 
-        int recyclerViewSpacing = 15;
-        RecyclerViewItemDecoration itemDecoration = new RecyclerViewItemDecoration(recyclerViewSpacing);
-        mPlayersRecyclerView.addItemDecoration(itemDecoration);
-
         mPlayersAdapter = new PlayersRecyclerViewAdapter(playersList);
         mPlayersRecyclerView.setAdapter(mPlayersAdapter);
     }

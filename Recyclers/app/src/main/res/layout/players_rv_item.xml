@@ -7,7 +7,7 @@
     android:layout_height="150dp"
     app:cardCornerRadius="15dp"
     app:cardElevation="5dp"
-    android:padding="10dp">
+    android:layout_margin="@dimen/rv_spacing">
 
     <TextView
         android:id="@+id/players_text_view"
