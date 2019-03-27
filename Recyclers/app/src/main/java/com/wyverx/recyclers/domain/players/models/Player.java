@@ -23,13 +23,17 @@ public class Player {
     @ColumnInfo(name = "elo")
     private int mElo;
 
+    @ColumnInfo(name = "memorized")
+    private int mMemorized;
 
-    public Player(int id, String lastName, String firstName, String country, int elo) {
+
+    public Player(int id, String lastName, String firstName, String country, int elo, int memorized) {
         mId = id;
         mLastName = lastName;
         mFirstName = firstName;
         mCountry = country;
         mElo = elo;
+        mMemorized = memorized;
     }
 
 
@@ -51,5 +55,9 @@ public class Player {
 
     public int getElo() {
         return mElo;
+    }
+
+    public int getMemorized() {
+        return mMemorized;
     }
 }

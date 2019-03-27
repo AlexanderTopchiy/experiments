@@ -57,6 +57,7 @@ public class PlayersRecyclerViewAdapter
                 playersDetailIntent.putExtra("First name", player.getFirstName());
                 playersDetailIntent.putExtra("Country", player.getCountry());
                 playersDetailIntent.putExtra("Elo", player.getElo());
+                playersDetailIntent.putExtra("Memorized", player.getMemorized());
                 view.getContext().startActivity(playersDetailIntent);
             }
         });

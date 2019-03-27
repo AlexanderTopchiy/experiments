@@ -29,7 +29,8 @@ public class PlayersDetailActivity extends AppCompatActivity {
                 playersDetailIntent.getStringExtra("Last name") + " " +
                 playersDetailIntent.getStringExtra("First name") + "\n" +
                 playersDetailIntent.getStringExtra("Country") + "\n" +
-                playersDetailIntent.getIntExtra("Elo", 0);
+                playersDetailIntent.getIntExtra("Elo", 0) + "\n" +
+                playersDetailIntent.getIntExtra("Memorized", 0);
 
         mPlayersDetailTextView.setText(playerInfo);
     }
