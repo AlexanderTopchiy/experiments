@@ -52,8 +52,11 @@ public class PlayersRecyclerViewAdapter
             @Override
             public void onClick(View view) {
                 Intent playersDetailIntent = new Intent(view.getContext(), PlayersDetailActivity.class);
+                playersDetailIntent.putExtra("Place", player.getId());
                 playersDetailIntent.putExtra("Last name", player.getLastName());
                 playersDetailIntent.putExtra("First name", player.getFirstName());
+                playersDetailIntent.putExtra("Country", player.getCountry());
+                playersDetailIntent.putExtra("Elo", player.getElo());
                 view.getContext().startActivity(playersDetailIntent);
             }
         });
