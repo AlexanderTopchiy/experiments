@@ -16,4 +16,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Players info" />
 
+    <Switch
+        android:id="@+id/players_detail_memorized_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Switch" />
+
 </android.support.constraint.ConstraintLayout>

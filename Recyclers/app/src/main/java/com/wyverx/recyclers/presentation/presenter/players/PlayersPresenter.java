@@ -9,9 +9,6 @@ import java.util.List;
 public interface PlayersPresenter extends BasePresenter {
 
     interface View extends BaseView {
-
         void displayPlayersList(List<Player> playersList);
-
-        void showError(String message);
     }
 }

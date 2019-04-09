@@ -23,16 +23,6 @@ public class PlayersInteractorImpl extends AbstractInteractor implements Players
     }
 
 
-    private void notifyError() {
-        mMainThread.post(new Runnable() {
-            @Override
-            public void run() {
-                mCallback.onDisplayFailed("Nothing to show :(");
-            }
-        });
-    }
-
-
     private void displayPlayersList(final List<Player> playersList) {
         mMainThread.post(new Runnable() {
             @Override
@@ -46,10 +36,6 @@ public class PlayersInteractorImpl extends AbstractInteractor implements Players
     @Override
     public void run() {
         final List<Player> playersList = mPlayersRepository.getPlayersInfo();
-        if (playersList == null || playersList.size() == 0) {
-            notifyError();
-            return;
-        }
         displayPlayersList(playersList);
     }
 }

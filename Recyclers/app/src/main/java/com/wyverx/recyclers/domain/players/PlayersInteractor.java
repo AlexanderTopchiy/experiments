@@ -9,7 +9,5 @@ public interface PlayersInteractor extends Interactor {
 
     interface Callback {
         void onDisplayPlayersList(List<Player> playersList);
-
-        void onDisplayFailed(String error);
     }
 }

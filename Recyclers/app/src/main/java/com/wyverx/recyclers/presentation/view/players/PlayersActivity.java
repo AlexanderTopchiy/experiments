@@ -57,10 +57,4 @@ public class PlayersActivity extends AppCompatActivity implements PlayersPresent
         mPlayersAdapter = new PlayersRecyclerViewAdapter(playersList);
         mPlayersRecyclerView.setAdapter(mPlayersAdapter);
     }
-
-
-    @Override
-    public void showError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
 }

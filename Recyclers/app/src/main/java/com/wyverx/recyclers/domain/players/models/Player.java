@@ -60,4 +60,9 @@ public class Player {
     public int getMemorized() {
         return mMemorized;
     }
+
+
+    public void setMemorized(int value) {
+        mMemorized = value;
+    }
 }

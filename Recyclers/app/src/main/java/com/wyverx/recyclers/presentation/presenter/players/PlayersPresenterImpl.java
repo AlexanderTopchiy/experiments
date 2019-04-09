@@ -39,19 +39,7 @@ public class PlayersPresenterImpl extends AbstractPresenter
 
 
     @Override
-    public void onError(String message) {
-        mView.showError(message);
-    }
-
-
-    @Override
     public void onDisplayPlayersList(List<Player> playersList) {
         mView.displayPlayersList(playersList);
-    }
-
-
-    @Override
-    public void onDisplayFailed(String error) {
-        onError(error);
     }
 }
