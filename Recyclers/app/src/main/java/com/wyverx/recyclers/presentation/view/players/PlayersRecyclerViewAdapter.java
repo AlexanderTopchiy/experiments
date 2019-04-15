@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import com.wyverx.recyclers.presentation.view.players.ViewHolder;
 
 import com.wyverx.recyclers.R;
 import com.wyverx.recyclers.domain.players.models.Player;
@@ -13,13 +13,13 @@ import com.wyverx.recyclers.domain.players.models.Player;
 import java.util.List;
 
 public class PlayersRecyclerViewAdapter
-        extends RecyclerView.Adapter<PlayersRecyclerViewAdapter.ViewHolder> {
+        extends RecyclerView.Adapter<ViewHolder> {
 
     private List<Player> mPlayersList;
 
 
-    public PlayersRecyclerViewAdapter(List<Player> playersList) {
-        mPlayersList = playersList;
+    public PlayersRecyclerViewAdapter() {
+
     }
 
 
@@ -31,26 +31,20 @@ public class PlayersRecyclerViewAdapter
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView mPlayersTextView;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            mPlayersTextView = itemView.findViewById(R.id.players_text_view);
-        }
-    }
-
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Player player = mPlayersList.get(position);
-        String playerName = player.getLastName() + " " + player.getFirstName();
-        holder.mPlayersTextView.setText(playerName);
+        holder.mPlayersTextView.setText(player.getFullName());
     }
 
 
     @Override
     public int getItemCount() {
         return mPlayersList.size();
+    }
+
+
+    public void setDataToAdapter(List<Player> playersList) {
+        mPlayersList = playersList;
     }
 }

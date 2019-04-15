@@ -49,6 +49,10 @@ public class Player {
         return mFirstName;
     }
 
+    public String getFullName() {
+        return mLastName + " " + mFirstName;
+    }
+
     public String getCountry() {
         return mCountry;
     }

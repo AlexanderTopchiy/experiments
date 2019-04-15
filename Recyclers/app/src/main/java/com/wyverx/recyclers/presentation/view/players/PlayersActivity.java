@@ -4,12 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.wyverx.recyclers.R;
 import com.wyverx.recyclers.data.repositories.players.PlayersRepositoryImpl;
 import com.wyverx.recyclers.domain.players.models.Player;
-import com.wyverx.recyclers.domain.threading.MainThreadImpl;
+import com.wyverx.recyclers.domain.threading.MainThread;
 import com.wyverx.recyclers.domain.threading.ThreadExecutor;
 import com.wyverx.recyclers.presentation.presenter.players.PlayersPresenter;
 import com.wyverx.recyclers.presentation.presenter.players.PlayersPresenterImpl;
@@ -34,11 +33,12 @@ public class PlayersActivity extends AppCompatActivity implements PlayersPresent
 
         ButterKnife.bind(this);
 
+        initPlayersRecyclerView();
+
         mPresenter = new PlayersPresenterImpl(
                 ThreadExecutor.getInstance(),
-                MainThreadImpl.getInstance(),
-                this,
-                new PlayersRepositoryImpl());
+                MainThread.getInstance(),
+                this);
     }
 
 
@@ -51,10 +51,14 @@ public class PlayersActivity extends AppCompatActivity implements PlayersPresent
 
     @Override
     public void displayPlayersList(List<Player> playersList) {
+        mPlayersAdapter.setDataToAdapter(playersList);
+        mPlayersRecyclerView.setAdapter(mPlayersAdapter);
+    }
+
+
+    public void initPlayersRecyclerView() {
         int numberOfColumns = 2;
         mPlayersRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-
-        mPlayersAdapter = new PlayersRecyclerViewAdapter(playersList);
-        mPlayersRecyclerView.setAdapter(mPlayersAdapter);
+        mPlayersAdapter = new PlayersRecyclerViewAdapter();
     }
 }

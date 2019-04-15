@@ -23,6 +23,13 @@ public class PlayersInteractorImpl extends AbstractInteractor implements Players
     }
 
 
+    @Override
+    public void run() {
+        final List<Player> playersList = mPlayersRepository.getPlayersInfo();
+        displayPlayersList(playersList);
+    }
+
+
     private void displayPlayersList(final List<Player> playersList) {
         mMainThread.post(new Runnable() {
             @Override
@@ -30,12 +37,5 @@ public class PlayersInteractorImpl extends AbstractInteractor implements Players
                 mCallback.onDisplayPlayersList(playersList);
             }
         });
-    }
-
-
-    @Override
-    public void run() {
-        final List<Player> playersList = mPlayersRepository.getPlayersInfo();
-        displayPlayersList(playersList);
     }
 }

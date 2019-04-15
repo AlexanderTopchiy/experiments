@@ -16,17 +16,17 @@ public class PlayersRepositoryImpl implements PlayersRepository {
     private PlayersDAO mPlayersDAO;
 
 
-    private void initDb() {
-        mDatabaseCopier= RecyclersDatabaseCopier.getInstance(RecyclersApplication.contextReference.get());
-        mDb = mDatabaseCopier.getDatabase();
-        mPlayersDAO = mDb.playersDAO();
-    }
-
-
     @Override
     public List<Player> getPlayersInfo() {
         initDb();
 
         return mPlayersDAO.getAllPlayers();
+    }
+
+
+    private void initDb() {
+        mDatabaseCopier= RecyclersDatabaseCopier.getInstance(RecyclersApplication.contextReference.get());
+        mDb = mDatabaseCopier.getDatabase();
+        mPlayersDAO = mDb.playersDAO();
     }
 }

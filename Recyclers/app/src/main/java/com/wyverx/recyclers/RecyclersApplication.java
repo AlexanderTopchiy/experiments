@@ -7,7 +7,7 @@ import java.lang.ref.SoftReference;
 
 public class RecyclersApplication extends Application {
 
-    public static transient SoftReference<Context> contextReference;
+    public static SoftReference<Context> contextReference;
 
     @Override
     public void onCreate() {

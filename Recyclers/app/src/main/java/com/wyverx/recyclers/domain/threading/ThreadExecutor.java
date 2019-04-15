@@ -34,7 +34,6 @@ public class ThreadExecutor implements Executor {
             @Override
             public void run() {
                 interactor.run();
-                interactor.onFinished();
             }
         });
     }
