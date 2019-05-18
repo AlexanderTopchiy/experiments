@@ -1,5 +1,6 @@
 package com.wyverx.retrodoer.mainlist;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
     }
 
 
+    @NonNull
     @Override
     public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())

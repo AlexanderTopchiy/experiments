@@ -6,11 +6,12 @@ import android.os.Bundle;
 
 import com.wyverx.retrodoer.R;
 import com.wyverx.retrodoer.dummy.DummyContent.DummyItem;
+import com.wyverx.retrodoer.itemdetail.ItemDetailFragment;
 
 public class MainActivity extends AppCompatActivity
         implements MainFragment.OnListFragmentInteractionListener {
 
-    public static final int COLUMN_COUNT = 1;
+    private static final int COLUMN_COUNT = 1;
 
 
     @Override
@@ -28,6 +29,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(DummyItem item) {
+        Bundle argsFromMain = new Bundle();
+        argsFromMain.putString("item id", item.id);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ItemDetailFragment itemDetailFragment = ItemDetailFragment.newInstance();
+        itemDetailFragment.setArguments(argsFromMain);
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_container, itemDetailFragment)
+                .commit();
     }
 }
