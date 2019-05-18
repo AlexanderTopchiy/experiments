@@ -8,12 +8,12 @@ import com.wyverx.retrodoer.R;
 import com.wyverx.retrodoer.dummy.DummyContent.DummyItem;
 
 public class MainViewHolder extends RecyclerView.ViewHolder {
-    public final View mView;
-    public final TextView mContentView;
-    public DummyItem mItem;
+
+    final View mView;
+    final TextView mContentView;
 
 
-    public MainViewHolder(View view) {
+    MainViewHolder(View view) {
         super(view);
         mView = view;
         mContentView = view.findViewById(R.id.content);
@@ -23,5 +23,10 @@ public class MainViewHolder extends RecyclerView.ViewHolder {
     @Override
     public String toString() {
         return super.toString() + " '" + mContentView.getText() + "'";
+    }
+
+
+    void bind(DummyItem item) {
+        mContentView.setText(item.content);
     }
 }

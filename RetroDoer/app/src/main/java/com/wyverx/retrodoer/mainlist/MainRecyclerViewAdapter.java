@@ -38,8 +38,8 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
 
     @Override
     public void onBindViewHolder(final MainViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).content);
+        final DummyItem mItem = mValues.get(position);
+        holder.bind(mItem);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +47,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onListFragmentInteraction(mItem);
                 }
             }
         });
