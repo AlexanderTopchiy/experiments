@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity
         MainFragment mainFragment = MainFragment.newInstance(COLUMN_COUNT);
         fragmentManager.beginTransaction()
                 .replace(R.id.main_container, mainFragment)
+                .addToBackStack("MainFragment")
                 .commit();
     }
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity
         itemDetailFragment.setArguments(argsFromMain);
         fragmentManager.beginTransaction()
                 .replace(R.id.main_container, itemDetailFragment)
+                .addToBackStack("ItemDetailFragment")
                 .commit();
     }
 }
