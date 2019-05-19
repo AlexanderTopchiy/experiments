@@ -31,4 +31,5 @@ ext {
     testRunnerVersion = '1.0.2'
     junitVersion = '4.12'
     espressoVersion = '3.0.2'
+    retrofitVersion = '2.5.0'
 }
