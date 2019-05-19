@@ -19,12 +19,14 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        MainFragment mainFragment = MainFragment.newInstance(COLUMN_COUNT);
-        fragmentManager.beginTransaction()
-                .replace(R.id.main_container, mainFragment)
-                .addToBackStack("MainFragment")
-                .commit();
+        if (savedInstanceState == null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            MainFragment mainFragment = MainFragment.newInstance(COLUMN_COUNT);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_container, mainFragment)
+                    .addToBackStack("MainFragment")
+                    .commit();
+        }
     }
 
 
