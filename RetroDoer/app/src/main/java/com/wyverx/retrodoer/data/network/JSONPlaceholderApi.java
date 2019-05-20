@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 
 public interface JSONPlaceholderApi {
 
-    @GET("posts")
+    @GET("/posts")
     Call<List<Post>> getAllPosts();
 }

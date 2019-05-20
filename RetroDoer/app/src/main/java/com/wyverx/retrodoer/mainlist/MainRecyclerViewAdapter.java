@@ -7,23 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wyverx.retrodoer.R;
+import com.wyverx.retrodoer.data.models.Post;
 import com.wyverx.retrodoer.mainlist.MainFragment.OnListFragmentInteractionListener;
-import com.wyverx.retrodoer.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Post} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Post> mValues;
     private final OnListFragmentInteractionListener mListener;
 
 
-    public MainRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MainRecyclerViewAdapter(List<Post> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -40,7 +39,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
 
     @Override
     public void onBindViewHolder(final MainViewHolder holder, int position) {
-        final DummyItem mItem = mValues.get(position);
+        final Post mItem = mValues.get(position);
         holder.bind(mItem);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

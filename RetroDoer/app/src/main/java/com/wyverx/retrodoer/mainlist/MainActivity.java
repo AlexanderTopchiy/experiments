@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.wyverx.retrodoer.R;
-import com.wyverx.retrodoer.dummy.DummyContent.DummyItem;
+import com.wyverx.retrodoer.data.models.Post;
 import com.wyverx.retrodoer.itemdetail.ItemDetailFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    public void onListFragmentInteraction(DummyItem item) {
+    public void onListFragmentInteraction(Post item) {
         Bundle argsFromMain = new Bundle();
-        argsFromMain.putString("item id", item.id);
+        argsFromMain.putString("post body", item.getPostBody());
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         ItemDetailFragment itemDetailFragment = ItemDetailFragment.newInstance();

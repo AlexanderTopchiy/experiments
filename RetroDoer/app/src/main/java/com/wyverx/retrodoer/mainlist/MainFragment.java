@@ -9,10 +9,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.wyverx.retrodoer.R;
-import com.wyverx.retrodoer.dummy.DummyContent;
-import com.wyverx.retrodoer.dummy.DummyContent.DummyItem;
+import com.wyverx.retrodoer.data.models.Post;
+import com.wyverx.retrodoer.data.network.JSONPlaceholderApi;
+import com.wyverx.retrodoer.data.network.RetrofitClientInstance;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A fragment representing a list of Items.
@@ -69,7 +78,7 @@ public class MainFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MainRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            getDataFromApi(recyclerView);
         }
         return view;
     }
@@ -94,6 +103,35 @@ public class MainFragment extends Fragment {
     }
 
 
+    public void getDataFromApi(final RecyclerView recyclerView) {
+        JSONPlaceholderApi networkApi =
+                RetrofitClientInstance.getRetrofitInstance().create(JSONPlaceholderApi.class);
+        Call<List<Post>> call = networkApi.getAllPosts();
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                if (response.isSuccessful()) {
+                    recyclerView.setAdapter(new MainRecyclerViewAdapter(response.body(), mListener));
+                } else {
+                    String mResposeCode = String.valueOf(response.code());
+                    Toast.makeText(getContext(),
+                            "Response code " + mResposeCode,
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                Toast.makeText(getContext(),
+                        "Something went wrong...Please try later!",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+    }
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -101,7 +139,6 @@ public class MainFragment extends Fragment {
      * activity.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Post item);
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wyverx.retrodoer.R;
+import com.wyverx.retrodoer.data.models.Post;
 import com.wyverx.retrodoer.dummy.DummyContent;
 import com.wyverx.retrodoer.dummy.DummyContent.DummyItem;
 
@@ -20,8 +21,7 @@ import java.util.List;
  */
 public class ItemDetailFragment extends Fragment {
 
-    private String mItemId;
-    private List<DummyItem> mValues = DummyContent.ITEMS;
+    private String mValues;
     private TextView mDetailTextView;
 
 
@@ -46,7 +46,7 @@ public class ItemDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mItemId = getArguments().getString("item id");
+            mValues = getArguments().getString("post body");
         }
     }
 
@@ -57,11 +57,7 @@ public class ItemDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_item_detail, container, false);
         mDetailTextView = view.findViewById(R.id.item_detail);
-        for (DummyItem item : mValues) {
-            if (item.id.equals(mItemId)) {
-                mDetailTextView.setText(item.details);
-            }
-        }
+        mDetailTextView.setText(mValues);
         return view;
     }
 }
