@@ -14,9 +14,8 @@ import android.widget.Toast;
 import com.wyverx.retrodoer.R;
 import com.wyverx.retrodoer.data.models.Post;
 import com.wyverx.retrodoer.data.network.JSONPlaceholderApi;
-import com.wyverx.retrodoer.data.network.RetrofitClientInstance;
+import com.wyverx.retrodoer.data.network.NetworkService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -104,9 +103,7 @@ public class MainFragment extends Fragment {
 
 
     public void getDataFromApi(final RecyclerView recyclerView) {
-        JSONPlaceholderApi networkApi =
-                RetrofitClientInstance.getRetrofitInstance().create(JSONPlaceholderApi.class);
-        Call<List<Post>> call = networkApi.getAllPosts();
+        Call<List<Post>> call = NetworkService.getInstance().getJSONApi().getAllPosts();
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
