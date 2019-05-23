@@ -3,7 +3,6 @@ package com.wyverx.retrodoer.mainlist;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 
 import com.wyverx.retrodoer.R;
 import com.wyverx.retrodoer.data.models.Post;
-import com.wyverx.retrodoer.data.network.JSONPlaceholderApi;
 import com.wyverx.retrodoer.data.network.NetworkService;
 
 import java.util.List;
@@ -30,8 +28,6 @@ import retrofit2.Response;
  */
 public class MainFragment extends Fragment {
 
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
 
@@ -43,23 +39,14 @@ public class MainFragment extends Fragment {
     }
 
 
-    @SuppressWarnings("unused")
-    public static MainFragment newInstance(int columnCount) {
-        MainFragment fragment = new MainFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
+    public static MainFragment newInstance() {
+        return new MainFragment();
     }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
     }
 
 
@@ -70,13 +57,8 @@ public class MainFragment extends Fragment {
 
         // Set the adapter
         if (view instanceof RecyclerView) {
-            Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
+            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
             getDataFromApi(recyclerView);
         }
         return view;
@@ -103,8 +85,10 @@ public class MainFragment extends Fragment {
 
 
     public void getDataFromApi(final RecyclerView recyclerView) {
-        Call<List<Post>> call = NetworkService.getInstance().getJSONApi().getAllPosts();
-        call.enqueue(new Callback<List<Post>>() {
+        NetworkService.getInstance()
+                .getJSONApi()
+                .getAllPosts()
+                .enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.isSuccessful()) {

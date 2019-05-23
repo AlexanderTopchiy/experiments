@@ -11,8 +11,6 @@ import com.wyverx.retrodoer.itemdetail.ItemDetailFragment;
 public class MainActivity extends AppCompatActivity
         implements MainFragment.OnListFragmentInteractionListener {
 
-    private static final int COLUMN_COUNT = 1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +19,7 @@ public class MainActivity extends AppCompatActivity
 
         if (savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
-            MainFragment mainFragment = MainFragment.newInstance(COLUMN_COUNT);
+            MainFragment mainFragment = MainFragment.newInstance();
             fragmentManager.beginTransaction()
                     .replace(R.id.main_container, mainFragment)
                     .addToBackStack("MainFragment")

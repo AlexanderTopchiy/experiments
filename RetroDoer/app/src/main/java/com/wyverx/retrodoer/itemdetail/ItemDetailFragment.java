@@ -8,11 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wyverx.retrodoer.R;
-import com.wyverx.retrodoer.data.models.Post;
-import com.wyverx.retrodoer.dummy.DummyContent;
-import com.wyverx.retrodoer.dummy.DummyContent.DummyItem;
-
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
