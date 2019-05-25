@@ -1,4 +1,4 @@
-package com.wyverx.retrodoer.itemdetail;
+package com.wyverx.retrodoer.itemdetails;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,16 +11,16 @@ import com.wyverx.retrodoer.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ItemDetailFragment#newInstance} factory method to
+ * Use the {@link ItemDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ItemDetailFragment extends Fragment {
+public class ItemDetailsFragment extends Fragment {
 
     private String mValues;
     private TextView mDetailTextView;
 
 
-    public ItemDetailFragment() {
+    public ItemDetailsFragment() {
         // Required empty public constructor
     }
 
@@ -29,10 +29,10 @@ public class ItemDetailFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment ItemDetailFragment.
+     * @return A new instance of fragment ItemDetailsFragment.
      */
-    public static ItemDetailFragment newInstance() {
-        ItemDetailFragment fragment = new ItemDetailFragment();
+    public static ItemDetailsFragment newInstance() {
+        ItemDetailsFragment fragment = new ItemDetailsFragment();
         return fragment;
     }
 

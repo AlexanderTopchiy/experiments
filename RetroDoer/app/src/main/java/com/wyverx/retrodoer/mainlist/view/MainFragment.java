@@ -1,4 +1,4 @@
-package com.wyverx.retrodoer.mainlist;
+package com.wyverx.retrodoer.mainlist.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,17 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.wyverx.retrodoer.R;
 import com.wyverx.retrodoer.data.models.Post;
-import com.wyverx.retrodoer.data.network.NetworkService;
+import com.wyverx.retrodoer.mainlist.MainContract;
+import com.wyverx.retrodoer.mainlist.presenter.MainPresenter;
+import com.wyverx.retrodoer.mainlist.repository.MainRepository;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A fragment representing a list of Items.
@@ -26,9 +23,10 @@ import retrofit2.Response;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements MainContract.View {
 
     private OnListFragmentInteractionListener mListener;
+    private MainContract.Presenter mMainPresenter;
 
 
     /**
@@ -47,6 +45,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mMainPresenter = MainPresenter.newInstance(this, MainRepository.newInstance());
     }
 
 
@@ -56,12 +55,10 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main_list, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-            getDataFromApi(recyclerView);
-        }
-        return view;
+        RecyclerView recyclerView = (RecyclerView) view;
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        mMainPresenter.matchData(recyclerView);
+        return recyclerView;
     }
 
 
@@ -84,32 +81,9 @@ public class MainFragment extends Fragment {
     }
 
 
-    public void getDataFromApi(final RecyclerView recyclerView) {
-        NetworkService.getInstance()
-                .getJSONApi()
-                .getAllPosts()
-                .enqueue(new Callback<List<Post>>() {
-            @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                if (response.isSuccessful()) {
-                    recyclerView.setAdapter(new MainRecyclerViewAdapter(response.body(), mListener));
-                } else {
-                    String mResposeCode = String.valueOf(response.code());
-                    Toast.makeText(getContext(),
-                            "Response code " + mResposeCode,
-                            Toast.LENGTH_SHORT)
-                            .show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-                Toast.makeText(getContext(),
-                        "Something went wrong...Please try later!",
-                        Toast.LENGTH_SHORT)
-                        .show();
-            }
-        });
+    @Override
+    public void showData(RecyclerView recyclerView, List<Post> list) {
+        recyclerView.setAdapter(new MainRecyclerViewAdapter(list, mListener));
     }
 
 

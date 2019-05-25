@@ -1,4 +1,4 @@
-package com.wyverx.retrodoer.mainlist;
+package com.wyverx.retrodoer.mainlist.view;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.wyverx.retrodoer.R;
 import com.wyverx.retrodoer.data.models.Post;
-import com.wyverx.retrodoer.mainlist.MainFragment.OnListFragmentInteractionListener;
+import com.wyverx.retrodoer.mainlist.view.MainFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
-    private final List<Post> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private List<Post> mValues;
+    private OnListFragmentInteractionListener mListener;
 
 
     public MainRecyclerViewAdapter(List<Post> items, OnListFragmentInteractionListener listener) {
@@ -42,7 +42,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
         final Post item = mValues.get(position);
         holder.bind(item);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.mItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {

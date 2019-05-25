@@ -1,4 +1,4 @@
-package com.wyverx.retrodoer.mainlist;
+package com.wyverx.retrodoer.mainlist.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -9,20 +9,14 @@ import com.wyverx.retrodoer.data.models.Post;
 
 public class MainViewHolder extends RecyclerView.ViewHolder {
 
-    final View mView;
+    final View mItem;
     final TextView mContentView;
 
 
-    MainViewHolder(View view) {
-        super(view);
-        mView = view;
-        mContentView = view.findViewById(R.id.content);
-    }
-
-
-    @Override
-    public String toString() {
-        return super.toString() + " '" + mContentView.getText() + "'";
+    MainViewHolder(View item) {
+        super(item);
+        mItem = item;
+        mContentView = item.findViewById(R.id.content);
     }
 
 
