@@ -9,18 +9,18 @@ import com.wyverx.retrodoer.data.models.Post;
 
 public class MainViewHolder extends RecyclerView.ViewHolder {
 
-    final View mItem;
+    final View mView;
     final TextView mContentView;
 
 
-    MainViewHolder(View item) {
-        super(item);
-        mItem = item;
-        mContentView = item.findViewById(R.id.content);
+    MainViewHolder(View view) {
+        super(view);
+        mView = view;
+        mContentView = mView.findViewById(R.id.content);
     }
 
 
-    void bind(Post item) {
-        mContentView.setText(item.getPostTitle());
+    void bind(Post post) {
+        mContentView.setText(post.getPostTitle());
     }
 }

@@ -15,8 +15,6 @@ import com.wyverx.retrodoer.mainlist.MainContract;
 import com.wyverx.retrodoer.mainlist.presenter.MainPresenter;
 import com.wyverx.retrodoer.mainlist.repository.MainRepository;
 
-import java.util.List;
-
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -25,8 +23,8 @@ import java.util.List;
  */
 public class MainFragment extends Fragment implements MainContract.View {
 
-    private OnListFragmentInteractionListener mListener;
     private MainContract.Presenter mMainPresenter;
+    private OnListFragmentInteractionListener mListener;
 
 
     /**
@@ -57,7 +55,7 @@ public class MainFragment extends Fragment implements MainContract.View {
         // Set the adapter
         RecyclerView recyclerView = (RecyclerView) view;
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        mMainPresenter.matchData(recyclerView);
+        mMainPresenter.loadData(recyclerView, mListener);
         return recyclerView;
     }
 
@@ -78,12 +76,6 @@ public class MainFragment extends Fragment implements MainContract.View {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-
-    @Override
-    public void showData(RecyclerView recyclerView, List<Post> list) {
-        recyclerView.setAdapter(new MainRecyclerViewAdapter(list, mListener));
     }
 
 

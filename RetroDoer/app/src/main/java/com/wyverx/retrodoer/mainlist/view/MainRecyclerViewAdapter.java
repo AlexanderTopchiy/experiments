@@ -42,10 +42,10 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
         final Post item = mValues.get(position);
         holder.bind(item);
 
-        holder.mItem.setOnClickListener(new View.OnClickListener() {
+        holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
+                if (mListener != null) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(item);

@@ -1,10 +1,13 @@
 package com.wyverx.retrodoer.mainlist.repository;
 
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.wyverx.retrodoer.data.models.Post;
 import com.wyverx.retrodoer.data.network.NetworkService;
 import com.wyverx.retrodoer.mainlist.MainContract;
+import com.wyverx.retrodoer.mainlist.view.MainFragment;
+import com.wyverx.retrodoer.mainlist.view.MainRecyclerViewAdapter;
 
 import java.util.List;
 
@@ -20,7 +23,8 @@ public class MainRepository implements MainContract.Repository {
 
 
     @Override
-    public void getDataFormApi(final ResultsCallback resultsCallback) {
+    public void getDataFormApi(final RecyclerView recyclerView,
+                               final MainFragment.OnListFragmentInteractionListener listener) {
         NetworkService.getInstance()
                 .getJSONApi()
                 .getAllPosts()
@@ -28,7 +32,7 @@ public class MainRepository implements MainContract.Repository {
                     @Override
                     public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                         if (response.isSuccessful()) {
-                            resultsCallback.onSuccess(response.body());
+                            recyclerView.setAdapter(new MainRecyclerViewAdapter(response.body(), listener));
                         } else {
                             String mResposeCode = String.valueOf(response.code());
                             Log.d("Retrofit.onResponse", "Response code " + mResposeCode);
@@ -41,10 +45,5 @@ public class MainRepository implements MainContract.Repository {
                     }
                 });
     }
-
-
-    public interface ResultsCallback {
-        // This is callback interface for Retrofit onResponse method
-        void onSuccess(List<Post> list);
-    }
 }
+

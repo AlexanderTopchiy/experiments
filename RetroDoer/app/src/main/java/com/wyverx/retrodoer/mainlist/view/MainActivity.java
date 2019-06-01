@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    public void onListFragmentInteraction(Post item) {
-        moveToItemDetailsFragment(item);
+    public void onListFragmentInteraction(Post post) {
+        moveToItemDetailsFragment(post);
     }
 
 
@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private void moveToItemDetailsFragment(Post item) {
+    private void moveToItemDetailsFragment(Post post) {
         Bundle argsFromMain = new Bundle();
-        argsFromMain.putString("post body", item.getPostBody());
+        argsFromMain.putString("post body", post.getPostBody());
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         ItemDetailsFragment itemDetailsFragment = ItemDetailsFragment.newInstance();

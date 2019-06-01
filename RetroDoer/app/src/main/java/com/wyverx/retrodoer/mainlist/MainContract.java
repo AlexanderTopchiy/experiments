@@ -2,27 +2,25 @@ package com.wyverx.retrodoer.mainlist;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.wyverx.retrodoer.data.models.Post;
-import com.wyverx.retrodoer.mainlist.repository.MainRepository;
-
-import java.util.List;
+import com.wyverx.retrodoer.mainlist.view.MainFragment;
 
 public interface MainContract {
 
     interface View {
 
-        void showData(RecyclerView recyclerView, List<Post> list);
     }
 
 
     interface Presenter {
 
-        void matchData(RecyclerView recyclerView);
+        void loadData(RecyclerView rv,
+                      MainFragment.OnListFragmentInteractionListener listener);
     }
 
 
     interface Repository {
 
-        void getDataFormApi(MainRepository.ResultsCallback callback);
+        void getDataFormApi(RecyclerView rv,
+                            MainFragment.OnListFragmentInteractionListener listener);
     }
 }
