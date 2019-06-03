@@ -2,7 +2,7 @@ package com.wyverx.retrodoer.mainlist;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.wyverx.retrodoer.mainlist.view.MainFragment;
+import com.wyverx.retrodoer.mainlist.view.MainRecyclerViewAdapter;
 
 public interface MainContract {
 
@@ -14,13 +14,13 @@ public interface MainContract {
     interface Presenter {
 
         void loadData(RecyclerView rv,
-                      MainFragment.OnListFragmentInteractionListener listener);
+                      MainRecyclerViewAdapter.ListFragmentListener listener);
     }
 
 
     interface Repository {
 
         void getDataFormApi(RecyclerView rv,
-                            MainFragment.OnListFragmentInteractionListener listener);
+                            MainRecyclerViewAdapter.ListFragmentListener listener);
     }
 }

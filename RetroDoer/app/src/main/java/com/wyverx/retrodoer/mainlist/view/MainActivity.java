@@ -9,7 +9,7 @@ import com.wyverx.retrodoer.data.models.Post;
 import com.wyverx.retrodoer.itemdetails.ItemDetailsFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements MainFragment.OnListFragmentInteractionListener {
+        implements MainRecyclerViewAdapter.ListFragmentListener {
 
 
     @Override
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    public void onListFragmentInteraction(Post post) {
+    public void onClickListListener(Post post) {
         moveToItemDetailsFragment(post);
     }
 

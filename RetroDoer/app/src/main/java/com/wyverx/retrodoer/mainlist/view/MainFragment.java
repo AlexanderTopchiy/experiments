@@ -10,27 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wyverx.retrodoer.R;
-import com.wyverx.retrodoer.data.models.Post;
 import com.wyverx.retrodoer.mainlist.MainContract;
 import com.wyverx.retrodoer.mainlist.presenter.MainPresenter;
 import com.wyverx.retrodoer.mainlist.repository.MainRepository;
 
 /**
  * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
  */
 public class MainFragment extends Fragment implements MainContract.View {
 
     private MainContract.Presenter mMainPresenter;
-    private OnListFragmentInteractionListener mListener;
+    private MainRecyclerViewAdapter.ListFragmentListener mListener;
 
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public MainFragment() {
     }
 
@@ -63,11 +55,11 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof MainRecyclerViewAdapter.ListFragmentListener) {
+            mListener = (MainRecyclerViewAdapter.ListFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+                    + " must implement ListFragmentListener");
         }
     }
 
@@ -76,16 +68,5 @@ public class MainFragment extends Fragment implements MainContract.View {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     */
-    public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Post item);
     }
 }

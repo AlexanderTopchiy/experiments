@@ -8,21 +8,25 @@ import android.view.ViewGroup;
 
 import com.wyverx.retrodoer.R;
 import com.wyverx.retrodoer.data.models.Post;
-import com.wyverx.retrodoer.mainlist.view.MainFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Post} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link ListFragmentListener}.
  */
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
+    public interface ListFragmentListener {
+        void onClickListListener(Post item);
+    }
+
+
     private List<Post> mValues;
-    private OnListFragmentInteractionListener mListener;
+    private final ListFragmentListener mListener;
 
 
-    public MainRecyclerViewAdapter(List<Post> items, OnListFragmentInteractionListener listener) {
+    public MainRecyclerViewAdapter(List<Post> items, ListFragmentListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -33,6 +37,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
     public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_main, parent, false);
+
         return new MainViewHolder(view);
     }
 
@@ -46,9 +51,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(item);
+                    mListener.onClickListListener(item);
                 }
             }
         });
@@ -58,5 +61,12 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+
+    void updateDataSet(final List<Post> items) {
+        this.mValues.clear();
+        this.mValues.addAll(items);
+        notifyDataSetChanged();
     }
 }

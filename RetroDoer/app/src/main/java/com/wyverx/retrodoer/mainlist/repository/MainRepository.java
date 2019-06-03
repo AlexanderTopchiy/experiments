@@ -6,7 +6,6 @@ import android.util.Log;
 import com.wyverx.retrodoer.data.models.Post;
 import com.wyverx.retrodoer.data.network.NetworkService;
 import com.wyverx.retrodoer.mainlist.MainContract;
-import com.wyverx.retrodoer.mainlist.view.MainFragment;
 import com.wyverx.retrodoer.mainlist.view.MainRecyclerViewAdapter;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class MainRepository implements MainContract.Repository {
 
     @Override
     public void getDataFormApi(final RecyclerView recyclerView,
-                               final MainFragment.OnListFragmentInteractionListener listener) {
+                               final MainRecyclerViewAdapter.ListFragmentListener listener) {
         NetworkService.getInstance()
                 .getJSONApi()
                 .getAllPosts()
