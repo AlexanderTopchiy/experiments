@@ -10,9 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wyverx.retrodoer.R;
+import com.wyverx.retrodoer.data.models.Post;
 import com.wyverx.retrodoer.mainlist.MainContract;
 import com.wyverx.retrodoer.mainlist.presenter.MainPresenter;
 import com.wyverx.retrodoer.mainlist.repository.MainRepository;
+
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -20,6 +23,7 @@ import com.wyverx.retrodoer.mainlist.repository.MainRepository;
 public class MainFragment extends Fragment implements MainContract.View {
 
     private MainContract.Presenter mMainPresenter;
+    private RecyclerView mRecyclerView;
     private MainRecyclerViewAdapter.ListFragmentListener mListener;
 
 
@@ -44,11 +48,10 @@ public class MainFragment extends Fragment implements MainContract.View {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_list, container, false);
 
-        // Set the adapter
-        RecyclerView recyclerView = (RecyclerView) view;
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        mMainPresenter.loadData(recyclerView, mListener);
-        return recyclerView;
+        mRecyclerView = (RecyclerView) view;
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        mMainPresenter.loadData();
+        return mRecyclerView;
     }
 
 
@@ -68,5 +71,11 @@ public class MainFragment extends Fragment implements MainContract.View {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+
+    @Override
+    public void matchData(List<Post> list) {
+        mRecyclerView.setAdapter(new MainRecyclerViewAdapter(list, mListener));
     }
 }

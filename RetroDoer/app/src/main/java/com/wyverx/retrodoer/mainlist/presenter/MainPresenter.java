@@ -1,10 +1,10 @@
 package com.wyverx.retrodoer.mainlist.presenter;
 
-import android.support.v7.widget.RecyclerView;
-
+import com.wyverx.retrodoer.data.models.Post;
 import com.wyverx.retrodoer.mainlist.MainContract;
 import com.wyverx.retrodoer.mainlist.repository.MainRepository;
-import com.wyverx.retrodoer.mainlist.view.MainRecyclerViewAdapter;
+
+import java.util.List;
 
 public class MainPresenter implements MainContract.Presenter {
 
@@ -25,7 +25,13 @@ public class MainPresenter implements MainContract.Presenter {
 
 
     @Override
-    public void loadData(RecyclerView rv, MainRecyclerViewAdapter.ListFragmentListener listener) {
-        mMainRepository.getDataFormApi(rv, listener);
+    public void loadData() {
+        mMainRepository.getDataFromApi(this);
+    }
+
+
+    @Override
+    public void onSuccess(List<Post> list) {
+        mMainView.matchData(list);
     }
 }

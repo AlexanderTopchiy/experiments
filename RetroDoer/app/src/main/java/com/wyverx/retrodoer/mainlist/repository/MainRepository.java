@@ -1,12 +1,10 @@
 package com.wyverx.retrodoer.mainlist.repository;
 
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.wyverx.retrodoer.data.models.Post;
 import com.wyverx.retrodoer.data.network.NetworkService;
 import com.wyverx.retrodoer.mainlist.MainContract;
-import com.wyverx.retrodoer.mainlist.view.MainRecyclerViewAdapter;
 
 import java.util.List;
 
@@ -22,8 +20,7 @@ public class MainRepository implements MainContract.Repository {
 
 
     @Override
-    public void getDataFormApi(final RecyclerView recyclerView,
-                               final MainRecyclerViewAdapter.ListFragmentListener listener) {
+    public void getDataFromApi(final MainContract.Presenter callback) {
         NetworkService.getInstance()
                 .getJSONApi()
                 .getAllPosts()
@@ -31,7 +28,7 @@ public class MainRepository implements MainContract.Repository {
                     @Override
                     public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                         if (response.isSuccessful()) {
-                            recyclerView.setAdapter(new MainRecyclerViewAdapter(response.body(), listener));
+                            callback.onSuccess(response.body());
                         } else {
                             String mResposeCode = String.valueOf(response.code());
                             Log.d("Retrofit.onResponse", "Response code " + mResposeCode);
