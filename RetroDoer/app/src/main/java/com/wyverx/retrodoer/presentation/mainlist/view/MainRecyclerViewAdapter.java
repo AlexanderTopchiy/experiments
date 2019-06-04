@@ -1,4 +1,4 @@
-package com.wyverx.retrodoer.mainlist.view;
+package com.wyverx.retrodoer.presentation.mainlist.view;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.wyverx.retrodoer.R;
 import com.wyverx.retrodoer.data.models.Post;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,12 +23,11 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
     }
 
 
-    private List<Post> mValues;
+    private List<Post> mValues = new ArrayList<>();
     private final ListFragmentListener mListener;
 
 
-    public MainRecyclerViewAdapter(List<Post> items, ListFragmentListener listener) {
-        mValues = items;
+    public MainRecyclerViewAdapter(ListFragmentListener listener) {
         mListener = listener;
     }
 
@@ -64,9 +64,9 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
     }
 
 
-    void updateDataSet(final List<Post> items) {
+    void updateDataSet(final List<Post> posts) {
         this.mValues.clear();
-        this.mValues.addAll(items);
+        this.mValues.addAll(posts);
         notifyDataSetChanged();
     }
 }

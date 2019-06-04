@@ -1,4 +1,4 @@
-package com.wyverx.retrodoer.mainlist.view;
+package com.wyverx.retrodoer.presentation.mainlist.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.wyverx.retrodoer.mainlist;
+package com.wyverx.retrodoer.presentation.mainlist;
 
 import com.wyverx.retrodoer.data.models.Post;
 
@@ -15,13 +15,5 @@ public interface MainContract {
     interface Presenter {
 
         void loadData();
-
-        void onSuccess(List<Post> list);
-    }
-
-
-    interface Repository {
-
-        void getDataFromApi(MainContract.Presenter callback);
     }
 }

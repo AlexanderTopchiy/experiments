@@ -1,15 +1,15 @@
-package com.wyverx.retrodoer.mainlist.presenter;
+package com.wyverx.retrodoer.presentation.mainlist.presenter;
 
 import com.wyverx.retrodoer.data.models.Post;
-import com.wyverx.retrodoer.mainlist.MainContract;
-import com.wyverx.retrodoer.mainlist.repository.MainRepository;
+import com.wyverx.retrodoer.presentation.mainlist.MainContract;
+import com.wyverx.retrodoer.data.repository.MainRepository;
 
 import java.util.List;
 
-public class MainPresenter implements MainContract.Presenter {
+public class MainPresenter implements MainContract.Presenter, MainRepository.ResponseCallback {
 
     private MainContract.View mMainView;
-    private MainContract.Repository mMainRepository;
+    private MainRepository mMainRepository;
 
 
     private MainPresenter(MainContract.View view, MainRepository repository) {

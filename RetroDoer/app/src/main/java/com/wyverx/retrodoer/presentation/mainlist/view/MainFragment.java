@@ -1,8 +1,8 @@
-package com.wyverx.retrodoer.mainlist.view;
+package com.wyverx.retrodoer.presentation.mainlist.view;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,9 +11,10 @@ import android.view.ViewGroup;
 
 import com.wyverx.retrodoer.R;
 import com.wyverx.retrodoer.data.models.Post;
-import com.wyverx.retrodoer.mainlist.MainContract;
-import com.wyverx.retrodoer.mainlist.presenter.MainPresenter;
-import com.wyverx.retrodoer.mainlist.repository.MainRepository;
+import com.wyverx.retrodoer.presentation.itemdetails.ItemDetailsFragment;
+import com.wyverx.retrodoer.presentation.mainlist.MainContract;
+import com.wyverx.retrodoer.presentation.mainlist.presenter.MainPresenter;
+import com.wyverx.retrodoer.data.repository.MainRepository;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     private MainContract.Presenter mMainPresenter;
     private RecyclerView mRecyclerView;
-    private MainRecyclerViewAdapter.ListFragmentListener mListener;
+    private MainRecyclerViewAdapter mAdapter;
 
 
     public MainFragment() {
@@ -40,6 +41,13 @@ public class MainFragment extends Fragment implements MainContract.View {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMainPresenter = MainPresenter.newInstance(this, MainRepository.newInstance());
+
+        mAdapter = new MainRecyclerViewAdapter(new MainRecyclerViewAdapter.ListFragmentListener() {
+            @Override
+            public void onClickListListener(Post post) {
+                moveToItemDetailsFragment(post);
+            }
+        });
     }
 
 
@@ -50,32 +58,28 @@ public class MainFragment extends Fragment implements MainContract.View {
 
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        mRecyclerView.setAdapter(mAdapter);
         mMainPresenter.loadData();
         return mRecyclerView;
     }
 
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof MainRecyclerViewAdapter.ListFragmentListener) {
-            mListener = (MainRecyclerViewAdapter.ListFragmentListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement ListFragmentListener");
-        }
-    }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    @Override
     public void matchData(List<Post> list) {
-        mRecyclerView.setAdapter(new MainRecyclerViewAdapter(list, mListener));
+        mAdapter.updateDataSet(list);
+    }
+
+
+    private void moveToItemDetailsFragment(Post post) {
+        Bundle argsFromMain = new Bundle();
+        argsFromMain.putString("post body", post.getPostBody());
+
+        FragmentManager fragmentManager = getFragmentManager();
+        ItemDetailsFragment itemDetailsFragment = ItemDetailsFragment.newInstance();
+        itemDetailsFragment.setArguments(argsFromMain);
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_container, itemDetailsFragment)
+                .addToBackStack("ItemDetailsFragment")
+                .commit();
     }
 }
